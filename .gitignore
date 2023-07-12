@@ -10,3 +10,6 @@ media/*
 **/__pycache__/
 **/*.pyc
 static_prod/*
+**/migrations/*.py
+**/migrations/*.pyc
+**/migrations/__pycache__/
