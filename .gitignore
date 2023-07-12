@@ -1,0 +1,12 @@
+.env
+.venv
+.env/
+venv/
+env/
+env.bak/
+venv.bak/
+media/*
+**/db.sqlite3
+**/__pycache__/
+**/*.pyc
+static_prod/*
