@@ -57,8 +57,10 @@ You will see the Swagger documentation page with the available endpoints and the
 ## API Endpoints
 Register: POST /api/register/
 Login: POST /api/login/
+Refresh Token : POST api/token/refresh/
 Product List: GET /api/product/list/
 Product Detail: GET /api/product/{id}/
 Product Create: POST /api/product/create/
 Product Update: PUT /api/product/{id}/
 Product Delete: DELETE /api/product/{id}/
+Product List with Pagination : GET /api/product/list-paginated/
