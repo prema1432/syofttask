@@ -1,5 +1,6 @@
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -7,7 +8,6 @@ from rest_framework.views import APIView
 from product.models.product_models import Product
 from product.permissions import AdminOrManagerPermission
 from product.serializers.ProductSerializer import ProductSerializer
-from rest_framework.pagination import PageNumberPagination
 
 
 class ProductListAPIView(APIView):
@@ -41,7 +41,6 @@ class ProductListAPIView(APIView):
 
 class ProductPagination(PageNumberPagination):
     page_size = 10
-
 
 
 class PaginatedProductListAPIView(APIView):

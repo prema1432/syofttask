@@ -18,17 +18,18 @@ from django.contrib import admin
 from django.urls import include, path
 from drf_spectacular.views import (SpectacularAPIView, SpectacularRedocView,
                                    SpectacularSwaggerView)
+from rest_framework_simplejwt import views as jwt_views
 
 from user.api.LoginAPIView import LoginAPIView
 from user.api.RegistrationAPIView import RegistrationAPIView
-from rest_framework_simplejwt import views as jwt_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/register/", RegistrationAPIView.as_view(), name="register"),
     path("api/login/", LoginAPIView.as_view(), name="login"),
-    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
-
+    path(
+        "api/token/refresh/", jwt_views.TokenRefreshView.as_view(), name="token_refresh"
+    ),
     path("api/product/", include("product.urls")),
     # drf-spectacular URLs
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
