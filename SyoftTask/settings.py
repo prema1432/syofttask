@@ -42,14 +42,22 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
+    "drf_spectacular",
     "user.apps.UserConfig",
     "product.apps.ProductConfig",
 ]
 
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Syoft Task API",
+    "DESCRIPTION": "Syoft API Description",
+    "VERSION": "1.0.0",
+}
 REST_FRAMEWORK = {
+    "EXCEPTION_HANDLER": "SyoftTask.utils.custom_exception_handler",
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 10,
 }

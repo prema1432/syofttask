@@ -22,3 +22,11 @@ class UserSerializer(serializers.ModelSerializer):
             role=validated_data["role"],
         )
         return user
+
+
+class UserLoginSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True, required=True)
+
+    class Meta:
+        model = User
+        fields = ("email", "password")

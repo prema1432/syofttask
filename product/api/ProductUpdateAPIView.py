@@ -1,16 +1,21 @@
-from rest_framework.views import APIView
+from django.shortcuts import get_object_or_404
+from drf_spectacular.utils import extend_schema
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from product.models.product_models import Product
+from rest_framework.views import APIView
 
+from product.models.product_models import Product
 from product.permissions import AdminOrManagerPermission
-from product.serializers import ProductSerializer
+from product.serializers.ProductSerializer import (ProductPatchSerializer,
+                                                   ProductPostSerializer,
+                                                   ProductSerializer)
+
 
 class ProductUpdateAPIView(APIView):
     """
     Product Update View
 
-    Endpoint: /api/product/update/<int:pk>/
+    Endpoint: /api/product/update/{pk}/
 
     Method: PUT
 
@@ -25,14 +30,27 @@ class ProductUpdateAPIView(APIView):
 
     permission_classes = [IsAuthenticated, AdminOrManagerPermission]
 
+    @extend_schema(
+        request=ProductPatchSerializer,
+        responses={200: ProductPatchSerializer(many=False)},
+    )
     def put(self, request, pk):
-        try:
-            product = Product.objects.get(pk=pk)
-        except Product.DoesNotExist:
-            return Response({'message': 'Product not found'}, status=404)
+        """
+        Update an existing product.
 
-        serializer = ProductSerializer(product, data=request.data)
+        Parameters:
+            - pk (uuid): The UUID identifier of the product.
+
+        Returns:
+            - Success (200 OK): Returns a success message along with the updated product.
+            - Error (404 Not Found): Returns an error message if the product is not found.
+            - Error (400 Bad Request): Returns an error message if the request data is invalid.
+        """
+        product = get_object_or_404(Product, pk=pk)
+        serializer = ProductPatchSerializer(product, data=request.data)
         if serializer.is_valid():
-            product = serializer.save()
-            return Response({'message': 'Product updated successfully', 'product': serializer.data})
+            product = serializer.save(updated_by=self.request.user)
+            return Response(
+                {"message": "Product updated successfully", "product": serializer.data}
+            )
         return Response(serializer.errors, status=400)
