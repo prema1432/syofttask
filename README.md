@@ -55,12 +55,12 @@ To access the Swagger documentation for this project, follow these steps:
 You will see the Swagger documentation page with the available endpoints and their descriptions. You can click on each endpoint to expand it and view the request/response details. Use the provided "Try it out" button to send requests and see the responses directly within the Swagger interface.
 
 ## API Endpoints
-Register: POST /api/register/
-Login: POST /api/login/
-Refresh Token : POST api/token/refresh/
-Product List: GET /api/product/list/
-Product Detail: GET /api/product/{id}/
-Product Create: POST /api/product/create/
-Product Update: PUT /api/product/{id}/
-Product Delete: DELETE /api/product/{id}/
-Product List with Pagination : GET /api/product/list-paginated/
+- Register: POST /api/register/
+- Login: POST /api/login/
+- Refresh Token : POST api/token/refresh/
+- Product List: GET /api/product/list/
+- Product Detail: GET /api/product/{id}/
+- Product Create: POST /api/product/create/
+- Product Update: PUT /api/product/{id}/
+- Product Delete: DELETE /api/product/{id}/
+- Product List with Pagination : GET /api/product/list-paginated/
